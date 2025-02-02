@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Routes</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8N-pXNYsR2cHrwUhG3UO0JAHYgKmFbjw&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: {lat: 20.5937, lng: 78.9629} // Center of India
+            });
+
+            var routes = [
+                // Remove or modify the following line to exclude the route from Delhi to Mumbai
+                // {from: {lat: 28.6139, lng: 77.2090}, to: {lat: 19.0760, lng: 72.8777}, transport: "Plane", time: "2h", cost: "$100"},
+                {from: {lat: 19.0760, lng: 72.8777}, to: {lat: 12.9716, lng: 77.5946}, transport: "Plane", time: "1.5h", cost: "$90"},
+                {from: {lat: 12.9716, lng: 77.5946}, to: {lat: 17.3850, lng: 78.4867}, transport: "Train", time: "12h", cost: "$40"},
+    
+            ];
+
+            routes.forEach(function(route, index) {
+                var markerA = new google.maps.Marker({
+                    position: route.from,
+                    map: map,
+                    title: "Start Point"
+                });
+
+                var markerB = new google.maps.Marker({
+                    position: route.to,
+                    map: map,
+                    title: "Destination"
+                });
+
+                var path = new google.maps.Polyline({
+                    path: [route.from, route.to],
+                    strokeColor: "#0000FF",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+
+                path.setMap(map);
+
+                google.maps.event.addListener(path, 'click', function() {
+                    alert("Route: " + route.transport + " - " + route.time + " - " + route.cost);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 600px;"></div>
+</body>
+</html>
