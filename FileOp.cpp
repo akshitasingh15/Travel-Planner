@@ -93,13 +93,11 @@ vector<Route*> routeParser(string filename){
 void outputGenerator(string filename, stack<Location*> cities, stack<Route*> routes, bool costOrTime) {
     ofstream output(filename.c_str());
 
-    // ✅ Correct API URL
     output << "<!DOCTYPE html>\n";
     output << "<html>\n<head>\n";
     output << "<title>Shortest path from Hyderabad to Mumbai</title>\n";
     output << "<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap' async defer></script>\n";
 
-    // ✅ JavaScript Fixes
     output << "<script>\n";
     output << "var map;\n";
     output << "var markers = [];\n";
